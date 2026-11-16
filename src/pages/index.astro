@@ -1,0 +1,32 @@
+---
+import '../styles/global.css'
+import Post from '../components/Post.astro'
+import ImageDialog from '../components/ImageDialog.astro'
+import db from '../../db.json'
+import type { Post as PostType } from '../lib/types'
+
+const posts = db.posts as PostType[]
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Galería de Animes</title>
+  </head>
+  <body class="container mx-auto p-8">
+    <h1 class="text-3xl font-bold mb-6">Mapa del top 20 de mis animes japoneses preferidos</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {posts.map((post) => (
+        <Post post={post} />
+      ))}
+    </div>
+
+    <ImageDialog />
+
+    <script>
+      import { initImageDialog } from '../lib/initImageDialog'
+      initImageDialog()
+    </script>
+  </body>
+</html>
